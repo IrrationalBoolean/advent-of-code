@@ -1,3 +1,4 @@
+-- Load Data
 CREATE TABLE day_01_2021 (
 	id SERIAL,
 	measurement INT
@@ -23,6 +24,7 @@ FROM day_01_2021
 
 SELECT SUM(i) FROM increases;
 
+-- Part 2
 with averages(id, i) AS (
 	SELECT
 		id,
@@ -37,4 +39,5 @@ SELECT
 	END
 FROM averages
 )
+
 SELECT SUM(j) FROM increases;
