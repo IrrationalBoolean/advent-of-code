@@ -23,3 +23,18 @@ FROM day_01_2021
 
 SELECT SUM(i) FROM increases;
 
+with averages(id, i) AS (
+	SELECT
+		id,
+		AVG(measurement) OVER (ORDER BY id ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING)
+	FROM day_1_2021
+),
+increases(j) AS (
+SELECT
+	CASE
+	WHEN i - LAG(i) OVER () > 0 AND id < 1999 THEN 1
+	ELSE 0
+	END
+FROM averages
+)
+SELECT SUM(j) FROM increases;
